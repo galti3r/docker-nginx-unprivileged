@@ -8,8 +8,8 @@ FROM $IMAGE
 
 LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 
-ENV NGINX_VERSION=1.27.2
-ENV NJS_VERSION=0.8.6
+ENV NGINX_VERSION=1.27.3
+ENV NJS_VERSION=0.8.8
 ENV NJS_RELEASE=1~bookworm
 ENV PKG_RELEASE=1~bookworm
 ENV DYNPKG_RELEASE=1~bookworm
@@ -78,10 +78,10 @@ RUN set -x \
                 xsltproc \
             && ( \
                 cd "$tempDir" \
-                && REVISION="${NGINX_VERSION}-${PKG_RELEASE}" \
+                && REVISION="0286c5190d972a49bffc9bf247885dd510ce8181" \
                 && REVISION=${REVISION%~*} \
                 && curl -f -L -O https://github.com/nginx/pkg-oss/archive/${REVISION}.tar.gz \
-                && PKGOSSCHECKSUM="6982e2df739645fc72db5bdf994032f799718230e7016e811d9d482e5cf41814c888660ca9a68814d5e99ab571e892ada3bd43166e720cbf04c7f85b6934772c *${REVISION}.tar.gz" \
+                && PKGOSSCHECKSUM="1e546bd15d7bc68e1772ecb6a73e29ba108ee5554a28928e57af038a9e8fc4f5cd35708ce89ad1dfaac97d870e663d32ef41045611d30b20d38b46816e3ab535 *${REVISION}.tar.gz" \
                 && if [ "$(openssl sha512 -r ${REVISION}.tar.gz)" = "$PKGOSSCHECKSUM" ]; then \
                     echo "pkg-oss tarball checksum verification succeeded!"; \
                 else \
